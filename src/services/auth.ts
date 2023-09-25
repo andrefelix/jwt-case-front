@@ -13,7 +13,7 @@ type SignupUserRequestData = {
 
 const api = getAPIClient();
 
-export async function loginRequest(body: LoginRequestData): Promise<string> {
+export const loginRequest = async (body: LoginRequestData): Promise<string> => {
   try {
     const { data, status } = await api.post("/auth/login", body);
 
@@ -25,9 +25,9 @@ export async function loginRequest(body: LoginRequestData): Promise<string> {
   } catch (error: any) {
     throw error;
   }
-}
+};
 
-export async function signupRequest(body: SignupUserRequestData) {
+export const signupRequest = async (body: SignupUserRequestData) => {
   try {
     const { data, status } = await api.post("/auth/signup", body);
 
@@ -37,4 +37,4 @@ export async function signupRequest(body: SignupUserRequestData) {
   } catch (error) {
     throw error;
   }
-}
+};

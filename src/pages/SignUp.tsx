@@ -56,7 +56,7 @@ const SignUp: FC = () => {
     }
   };
 
-  function handleLoginClick() {
+  const handleLoginClick = () => {
     window.location.replace("/login");
   }
 
