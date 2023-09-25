@@ -42,6 +42,10 @@ const Planets: FC = () => {
     setPreviousUrltUrl(data?.previous || null);
   };
 
+  const handleTasksLink = () => {
+    window.location.replace("/tasks");
+  }
+
   return (
     <>
       <div className="container">
@@ -50,6 +54,11 @@ const Planets: FC = () => {
           style={{ height: "100vh" }}
         >
           <div className="card mb-3" style={{ maxWidth: "720px" }}>
+            <nav className="navbar bg-body-tertiary">
+              <div className="container-fluid">
+                <button className="btn btn-link" onClick={handleTasksLink}>Task list</button>
+              </div>
+            </nav>
             <div className="col-md-12">
               <div className="card-body">
                 <h3 className="card-title text-center text-secondary mt-3">

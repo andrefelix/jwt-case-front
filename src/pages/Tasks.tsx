@@ -63,6 +63,10 @@ const Tasks: FC = () => {
     }
   };
 
+  const handlePlanetLink = () => {
+    window.location.replace("/planets");
+  }
+
   return (
     <>
       <div className="container">
@@ -70,7 +74,13 @@ const Tasks: FC = () => {
           className="row d-flex justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
+          
           <div className="card mb-3" style={{ maxWidth: "720px" }}>
+            <nav className="navbar bg-body-tertiary">
+              <div className="container-fluid">
+                <button className="btn btn-link" onClick={handlePlanetLink}>Planet list</button>
+              </div>
+            </nav>
             <div className="col-md-12">
               <div className="card-body">
                 <h3 className="card-title text-center text-secondary mt-3">
