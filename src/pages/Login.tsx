@@ -5,6 +5,7 @@ import { ToastContainer, toast, Flip } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.min.css";
 import { loginRequest } from "../services/auth";
+import { setLocalStorageAuth } from "../utils/local-storage";
 
 const Login: FC = (): JSX.Element => {
   const {
@@ -22,7 +23,13 @@ const Login: FC = (): JSX.Element => {
     try {
       const token = await loginRequest(params);
 
-      toast.success('Usuário logado com sucesso', {
+      setLocalStorageAuth(token);
+
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 1000);
+
+      toast.success("Usuário logado com sucesso", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: true,
@@ -32,12 +39,6 @@ const Login: FC = (): JSX.Element => {
         progress: 0,
         toastId: "my_toast",
       });
-
-      localStorage.setItem("auth", token);
-
-      setTimeout(() => {
-        window.location.replace("/");
-      }, 1000);
     } catch (error) {
       console.log(error);
 
@@ -54,7 +55,7 @@ const Login: FC = (): JSX.Element => {
     }
   };
 
-  function handleSignupClick() {
+  const handleSignupClick = () => {
     window.location.replace("/signup");
   }
 
