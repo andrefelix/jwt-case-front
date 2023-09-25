@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Flip, ToastContainer, toast } from "react-toastify";
 import { createTaskRequest, getTaskListRequest } from "../services/tasks";
 import { TaskList } from "../types/types";
+import { handleError } from "../utils/handle-error";
 
 const Tasks: FC = () => {
   const {
@@ -20,7 +21,7 @@ const Tasks: FC = () => {
         const data = await getTaskListRequest();
         setTaskList(data);
       } catch (error) {
-        console.log(error);
+        handleError(error);
       }
     };
 
