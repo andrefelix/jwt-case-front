@@ -1,12 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Flip, ToastContainer, toast } from "react-toastify";
-import { createTaskRequest } from "../services/tasks";
-
-type Task = {
-  id: string;
-  name: string;
-};
+import { createTaskRequest, getTaskListRequest } from "../services/tasks";
+import { TaskList } from "../types/types";
 
 const Tasks: FC = () => {
   const {
@@ -16,7 +12,20 @@ const Tasks: FC = () => {
     formState: { errors },
   } = useForm();
 
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const [taskList, setTaskList] = useState<TaskList>([]);
+
+  useEffect(() => {
+    const fetchTaskList = async () => {
+      try {
+        const data = await getTaskListRequest();
+        setTaskList(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchTaskList();
+  }, []);
 
   const createTask = async (data: any) => {
     const params = { name: data.taskName };

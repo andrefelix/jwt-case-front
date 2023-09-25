@@ -1,6 +1,7 @@
 import { HttpStatusCode } from "axios";
 import { getAPIClient } from "./api";
 import { getLocalStorageAuth } from "../utils/local-storage";
+import { Task, TaskList } from "../types/types";
 
 type TaskCreateRequestData = {
   name: string;
@@ -8,12 +9,18 @@ type TaskCreateRequestData = {
 
 const api = getAPIClient();
 
-export const createTaskRequest = async (body: TaskCreateRequestData) => {
+const generateAuthorization = () => {
   const token = getLocalStorageAuth();
 
+  return { Authorization: `Bearer ${token}` };
+};
+
+export const createTaskRequest = async (
+  body: TaskCreateRequestData
+): Promise<Task> => {
   try {
     const { data, status } = await api.post("/tasks", body, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: generateAuthorization(),
     });
 
     if (status !== HttpStatusCode.Created) {
@@ -22,6 +29,22 @@ export const createTaskRequest = async (body: TaskCreateRequestData) => {
 
     return data;
   } catch (error: any) {
+    throw error;
+  }
+};
+
+export const getTaskListRequest = async (): Promise<TaskList> => {
+  try {
+    const { data, status } = await api.get("/tasks", {
+      headers: generateAuthorization(),
+    });
+
+    if (status !== HttpStatusCode.Ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
     throw error;
   }
 };
