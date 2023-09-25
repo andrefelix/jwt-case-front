@@ -5,7 +5,7 @@ import { getLocalStorageAuth } from "../utils/local-storage";
 const RestrictedRoute = (props:any) => {
   const token = getLocalStorageAuth();
   
-  return <>{ !token ? <Route {...props} /> : <Redirect to="/" /> }</>;
+  return <>{ !token ? <Route {...props} /> : <Redirect to="/tasks" /> }</>;
 };
 
 export default RestrictedRoute;
