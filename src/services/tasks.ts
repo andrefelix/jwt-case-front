@@ -1,19 +1,13 @@
 import { HttpStatusCode } from "axios";
 import { getAPIClient } from "./api";
-import { getLocalStorageAuth } from "../utils/local-storage";
 import { Task, TaskList } from "../types/types";
+import { generateAuthorization } from "./helper";
 
 type TaskCreateRequestData = {
   name: string;
 };
 
 const api = getAPIClient();
-
-const generateAuthorization = () => {
-  const token = getLocalStorageAuth();
-
-  return { Authorization: `Bearer ${token}` };
-};
 
 export const createTaskRequest = async (
   body: TaskCreateRequestData

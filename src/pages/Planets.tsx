@@ -3,6 +3,8 @@ import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { testCurrentUserRequest } from "../services/users";
+import { handleError } from "../utils/handle-error";
 
 const Planets: FC = () => {
   const [planets, setPlanets] = useState([]);
@@ -10,7 +12,13 @@ const Planets: FC = () => {
   const [previousUrl, setPreviousUrltUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchTaskList = async () => {
+    const fetchPlanetList = async () => {
+      try {
+        await testCurrentUserRequest();
+      } catch (error) {
+        handleError(error);
+      }
+
       try {
         const { data } = await axios.get('https://swapi.dev/api/planets');
         
@@ -22,7 +30,7 @@ const Planets: FC = () => {
       }
     };
 
-    fetchTaskList();
+    fetchPlanetList();
   }, []);
 
   const handleNavigateClick = async (url: string | null) => {
