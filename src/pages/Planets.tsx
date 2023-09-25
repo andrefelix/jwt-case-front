@@ -1,8 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
 import axios from "axios";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { testCurrentUserRequest } from "../services/users";
 import { handleError } from "../utils/handle-error";
 
@@ -68,14 +65,16 @@ const Planets: FC = () => {
                 {(previousUrl || nextUrl) && (
                   <div className="container row justify-content-around mt-4">
                     <button
-                      className="btn btn-primary col-md-4"
+                      className={`btn col-md-4 ${!!previousUrl ? 'btn-primary' : 'btn-secondary'}`}
                       onClick={() => handleNavigateClick(previousUrl)}
+                      disabled={previousUrl === null}
                     >
                       Previous
                     </button>
                     <button
-                      className="btn btn-primary col-md-4"
+                      className={`btn col-md-4 ${!!nextUrl ? 'btn-primary' : 'btn-secondary'}`}
                       onClick={() => handleNavigateClick(nextUrl)}
+                      disabled={nextUrl === null}
                     >
                       Next
                     </button>
