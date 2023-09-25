@@ -26,7 +26,7 @@ const Login: FC = (): JSX.Element => {
       setLocalStorageAuth(token);
 
       setTimeout(() => {
-        window.location.replace("/");
+        window.location.replace("/tasks");
       }, 1000);
 
       toast.success("Usuário logado com sucesso", {
