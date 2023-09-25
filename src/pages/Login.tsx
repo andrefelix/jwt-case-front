@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast, Flip } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.min.css";
 import { loginRequest } from "../services/auth";
 import { setLocalStorageAuth } from "../utils/local-storage";
+
+import "react-toastify/dist/ReactToastify.min.css";
 
 const Login: FC = (): JSX.Element => {
   const {

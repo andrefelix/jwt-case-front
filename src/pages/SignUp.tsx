@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast, Flip } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.min.css";
 import { signupRequest } from "../services/auth";
+
+import "react-toastify/dist/ReactToastify.min.css";
 
 const SignUp: FC = () => {
   const {
