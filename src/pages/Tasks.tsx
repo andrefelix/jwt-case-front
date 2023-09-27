@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createTaskRequest, getTaskListRequest } from "../services/tasks";
 import { TaskList } from "../types/types";
-import { handleError } from "../utils/handle-error";
+import { handleRejectError } from "../utils/handle-reject-error";
 import ToastComponent, { ToastError, ToastSuccess } from "../components/ToastComponent";
 import Container from "../components/Container";
 import { Card } from "../components/Card";
@@ -23,7 +23,7 @@ const Tasks: FC = () => {
         const data = await getTaskListRequest();
         setTaskList(data);
       } catch (error) {
-        handleError(error);
+        handleRejectError(error);
       }
     };
 

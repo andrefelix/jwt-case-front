@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import axios from "axios";
-import { testCurrentUserRequest } from "../services/users";
-import { handleError } from "../utils/handle-error";
+import { handleRejectError } from "../utils/handle-reject-error";
 import Container from "../components/Container";
 import { Card } from "../components/Card";
 
@@ -13,12 +12,6 @@ const Planets: FC = () => {
   useEffect(() => {
     const fetchPlanetList = async () => {
       try {
-        await testCurrentUserRequest();
-      } catch (error) {
-        handleError(error);
-      }
-
-      try {
         const { data } = await axios.get('https://swapi.dev/api/planets');
         
         setPlanets(data?.results?.map((planet: any) => planet.name) || []);
@@ -26,6 +19,7 @@ const Planets: FC = () => {
         setPreviousUrltUrl(data?.previous || null);
       } catch (error) {
         console.log(error);
+        handleRejectError(error);
       }
     };
 
