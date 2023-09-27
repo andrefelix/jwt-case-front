@@ -36,10 +36,6 @@ const SignUp: FC = () => {
     }
   };
 
-  const handleLoginClick = () => {
-    window.location.replace("/login");
-  }
-
   return (
     <>
       <Container>
@@ -109,11 +105,7 @@ const SignUp: FC = () => {
                 </button>
                 <p className="card-text">
                   Já possui uma conta?{" "}
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    to={"/login"}
-                    onClick={handleLoginClick}
-                  >
+                  <Link style={{ textDecoration: "none" }} to="/login">
                     Log In
                   </Link>
                 </p>

@@ -37,10 +37,6 @@ const Login: FC = (): JSX.Element => {
     }
   };
 
-  const handleSignupClick = () => {
-    window.location.replace("/signup");
-  }
-
   return (
     <>
       <Container>
@@ -87,11 +83,7 @@ const Login: FC = (): JSX.Element => {
                 </button>
                 <p className="card-text pb-2">
                   Criar uma conta nova?{" "}
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    to={"/signup"}
-                    onClick={handleSignupClick}
-                  >
+                  <Link style={{ textDecoration: "none" }} to="/signup">
                     Sign Up
                   </Link>
                 </p>
