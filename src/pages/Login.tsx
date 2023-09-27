@@ -1,12 +1,10 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast, Flip } from "react-toastify";
 
 import { loginRequest } from "../services/auth";
 import { setLocalStorageAuth } from "../utils/local-storage";
-
-import "react-toastify/dist/ReactToastify.min.css";
+import ToastComponent, { ToastError, ToastSuccess } from "../components/ToastComponent";
 
 const Login: FC = (): JSX.Element => {
   const {
@@ -30,29 +28,10 @@ const Login: FC = (): JSX.Element => {
         window.location.replace("/tasks");
       }, 1000);
 
-      toast.success("Usuário logado com sucesso", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: 0,
-        toastId: "my_toast",
-      });
+      ToastSuccess("Usuário logado com sucesso");
     } catch (error) {
       console.log(error);
-
-      toast.error("Erro ao logar com o usuário", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: 0,
-        toastId: "my_toast",
-      });
+      ToastError("Erro ao logar com o usuário");
     }
   };
 
@@ -129,18 +108,7 @@ const Login: FC = (): JSX.Element => {
         </div>
       </div>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable={false}
-        pauseOnHover
-        limit={1}
-        transition={Flip}
-      />
+      <ToastComponent />
     </>
   );
 };

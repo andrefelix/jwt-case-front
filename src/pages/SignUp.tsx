@@ -1,11 +1,9 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast, Flip } from "react-toastify";
 
 import { signupRequest } from "../services/auth";
-
-import "react-toastify/dist/ReactToastify.min.css";
+import ToastComponent, { ToastError, ToastSuccess } from "../components/ToastComponent";
 
 const SignUp: FC = () => {
   const {
@@ -24,18 +22,7 @@ const SignUp: FC = () => {
 
     try {
       await signupRequest(params);
-
-      toast.success("Usuário criado com sucesso", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: 0,
-        toastId: "my_toast",
-      });
-
+      ToastSuccess("Usuário criado com sucesso");
       reset();
       
       setTimeout(() => {
@@ -43,17 +30,7 @@ const SignUp: FC = () => {
       }, 1000);
     } catch (error) {
       console.log(error);
-
-      toast.error("Erro ao criar usuário", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: 0,
-        toastId: "my_toast",
-      });
+      ToastError("Erro ao criar usuário");
     }
   };
 
@@ -153,18 +130,7 @@ const SignUp: FC = () => {
         </div>
       </div>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable={false}
-        pauseOnHover
-        limit={1}
-        transition={Flip}
-      />
+      <ToastComponent />
     </>
   );
 };

@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   return (

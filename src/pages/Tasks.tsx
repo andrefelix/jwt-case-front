@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Flip, ToastContainer, toast } from "react-toastify";
 import { createTaskRequest, getTaskListRequest } from "../services/tasks";
 import { TaskList } from "../types/types";
 import { handleError } from "../utils/handle-error";
+import ToastComponent, { ToastError, ToastSuccess } from "../components/ToastComponent";
 
 const Tasks: FC = () => {
   const {
@@ -34,30 +34,10 @@ const Tasks: FC = () => {
     try {
       const task = await createTaskRequest(params)
       setTaskList([...taskList, task]);
-
-      toast.success("Task criada com sucesso", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: 0,
-        toastId: "my_toast",
-      });
+      ToastSuccess("Task criada com sucesso");
     } catch (error) {
       console.log(error);
-
-      toast.error("Erro ao criar a task", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: 0,
-        toastId: "my_toast",
-      });
+      ToastError("Erro ao criar a task");
     } finally {
       reset();
     }
@@ -117,19 +97,7 @@ const Tasks: FC = () => {
           </div>
         </div>
       </div>
-
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable={false}
-        pauseOnHover
-        limit={1}
-        transition={Flip}
-      />
+      <ToastComponent />
     </>
   );
 };
