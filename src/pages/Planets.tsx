@@ -3,6 +3,7 @@ import axios from "axios";
 import { testCurrentUserRequest } from "../services/users";
 import { handleError } from "../utils/handle-error";
 import Container from "../components/Container";
+import { Card } from "../components/Card";
 
 const Planets: FC = () => {
   const [planets, setPlanets] = useState([]);
@@ -43,24 +44,18 @@ const Planets: FC = () => {
     setPreviousUrltUrl(data?.previous || null);
   };
 
-  const handleTasksLink = () => {
+  const handleTaskLink = () => {
     window.location.replace("/tasks");
   }
 
   return (
     <>
       <Container>
-        <div className="card mb-3" style={{ maxWidth: "720px" }}>
-          <nav className="navbar bg-body-tertiary">
-            <div className="container-fluid">
-              <button className="btn btn-link" onClick={handleTasksLink}>Task list</button>
-            </div>
-          </nav>
-          <div className="col-md-12">
-            <div className="card-body">
-              <h3 className="card-title text-center text-secondary mt-3">
-                Planets
-              </h3>
+        <Card.Container maxWidth="lg">
+          <Card.Nav linkName="Task List" handleLink={handleTaskLink} />
+          <Card.Body>
+            <div>
+              <Card.Title title="Planet List" />
               <div className="mt-4">
                 <ul className="list-group">
                   {planets.map((planet, index) => {
@@ -87,8 +82,8 @@ const Planets: FC = () => {
                 </div>
               )}
             </div>
-          </div>
-        </div>
+          </Card.Body>
+        </Card.Container>
       </Container>
     </>
   );
